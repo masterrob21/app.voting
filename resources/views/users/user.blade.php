@@ -38,7 +38,10 @@
                                             <td class="px-2 py-2">{{ $user->name }}</td>
                                             <td class="px-2 py-2">{{ $user->email }}</td>
                                             <td class="px-2 py-2">{{ ($user->is_system) ? 'Yes' : 'No' }}</td>
-                                            <td class="px-2 py-2"><a href="" class="rounded bg-red-300 p-2 text-xs hover:opacity-80">Reset password</a></td>
+                                            <td class="px-2 py-2">
+                                                <a href="" class="rounded bg-red-300 p-1 text-xs hover:opacity-80">Reset password</a>
+                                                <a href="" class="rounded p-1 text-xs bg-slate-300 hover:opacity-80 ">Disable</a>
+                                            </td>
                                         </tr>
                                     @endforeach
                                 @endif
