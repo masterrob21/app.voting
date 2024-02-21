@@ -9,6 +9,11 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="mb-5">
                 <a href="" class="bg-blue-400 px-4 py-3 rounded hover:opacity-70" class="btn">Add User</a>
+                @if (session('status'))
+                    <div class="p-3 bg-green-300 mt-3">
+                        {{ session('status') }}
+                    </div>
+                @endif
             </div>
 
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -35,13 +40,16 @@
                                 @else
                                     @foreach ($users as $user)
                                         <tr class="border-b even:bg-gray-50 whitespace-nowrap">
-                                            <td class="px-2 py-2">{{ $user->name }}</td>
-                                            <td class="px-2 py-2">{{ $user->email }}</td>
-                                            <td class="px-2 py-2">{{ ($user->is_system) ? 'Yes' : 'No' }}</td>
-                                            <td class="px-2 py-2">
-                                                <a href="" class="rounded bg-red-300 p-1 text-xs hover:opacity-80">Reset password</a>
-                                                <a href="" class="rounded p-1 text-xs bg-slate-300 hover:opacity-80 ">Disable</a>
-                                            </td>
+                                            <form action="" method="POST">
+                                                @csrf
+                                                <td class="px-2 py-2">{{ $user->name }}</td>
+                                                <td class="px-2 py-2">{{ $user->email }}</td>
+                                                <td class="px-2 py-2">{{ ($user->is_system) ? 'Yes' : 'No' }}</td>
+                                                <td class="px-2 py-2">
+                                                    <a href="user/{{$user->id}}" class="rounded bg-red-300 p-1 text-xs hover:opacity-80">Reset password</a>
+                                                    <a href="" class="rounded p-1 text-xs bg-slate-300 hover:opacity-80 ">Disable</a>
+                                                </td>
+                                            </form>
                                         </tr>
                                     @endforeach
                                 @endif

@@ -17,10 +17,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+
 Route::get('ec', [Ec_OfficialController::class, 'index'])->name('ec.index');
 
 Route::get('/voters', [Voter_RegisterController::class, 'index'])->name('voters.index');
 
+Route::get('user/{id}', [UserController::class, 'update'])->name('user.resetpass');
 Route::get('/users', [UserController::class, 'index'])->name('users');
 
 Route::get('/', function () {

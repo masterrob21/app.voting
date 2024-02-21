@@ -48,11 +48,15 @@ class UserController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Reset the user password.
      */
     public function update(Request $request, string $id)
     {
-        //
+        $user = User::find($id);
+        $user->password = bcrypt('password1234');
+        $user->save();
+        
+        return redirect()->route('users')->with('status', 'Password reset successfully');
     }
 
     /**
