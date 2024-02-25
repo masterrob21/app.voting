@@ -2,6 +2,10 @@
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
+    @env('local')
+    <x-login-link redirect-url="{{ route('dashboard') }}" email="admin@noreply.com" />
+    @endenv
+
     <form method="POST" action="{{ route('login') }}">
         @csrf
 
