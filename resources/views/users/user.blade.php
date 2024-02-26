@@ -9,11 +9,13 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="mb-5">
                 <a href="" class="bg-blue-400 px-4 py-3 rounded hover:opacity-70" class="btn">Add User</a>
+
                 @if (session('status'))
-                    <div class="p-3 bg-green-300 mt-3">
+                    <div class="p-3 bg-green-300 mt-3" id="alert-message">
                         {{ session('status') }}
                     </div>
                 @endif
+
             </div>
 
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -60,4 +62,14 @@
             </div>
         </div>
     </div>
+
+    
 </x-app-layout>
+
+<script type="module">
+    $(document).ready(function(){
+        setTimeout(() => {
+            $('#alert-message').fadeOut();
+        }, 3000);
+    });
+</script>
