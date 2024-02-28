@@ -48,8 +48,10 @@
                                                 <td class="px-2 py-2">{{ $user->email }}</td>
                                                 <td class="px-2 py-2">{{ ($user->is_system) ? 'Yes' : 'No' }}</td>
                                                 <td class="px-2 py-2">
+                                                    @if (!$user->is_system)
                                                     <a href="user/{{$user->id}}" class="rounded bg-red-300 p-1 text-xs hover:opacity-80">Reset password</a>
                                                     <a href="" class="rounded p-1 text-xs bg-slate-300 hover:opacity-80 ">Disable</a>
+                                                    @endif
                                                 </td>
                                             </form>
                                         </tr>
