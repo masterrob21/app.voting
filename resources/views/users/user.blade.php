@@ -8,7 +8,7 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="mb-5">
-                <a href="" class="bg-blue-400 px-4 py-3 rounded hover:opacity-70" class="btn">Add User</a>
+                <a href="{{ route('user.create') }}" class="bg-blue-400 px-4 py-3 rounded hover:opacity-70" class="btn">Add User</a>
 
                 @if (session('status'))
                     <div class="p-3 bg-green-300 mt-3" id="alert-message">
@@ -44,6 +44,7 @@
                                         <tr class="border-b even:bg-gray-50 whitespace-nowrap">
                                             <form action="" method="POST">
                                                 @csrf
+                                                @method('put')
                                                 <td class="px-2 py-2">{{ $user->name }}</td>
                                                 <td class="px-2 py-2">{{ $user->email }}</td>
                                                 <td class="px-2 py-2">{{ ($user->is_system) ? 'Yes' : 'No' }}</td>

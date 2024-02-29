@@ -26,6 +26,8 @@ Route::get('/voters', [Voter_RegisterController::class, 'index'])->name('voters.
 Route::middleware('auth')->group(function(){
     Route::get('user/{id}', [UserController::class, 'update'])->name('user.resetpass');
     Route::get('/users', [UserController::class, 'index'])->name('users');
+    Route::get('/user', [UserController::class, 'create'])->name('user.create');
+    Route::post('/user', [UserController::class, 'store'])->name('user.store');
 });
 
 

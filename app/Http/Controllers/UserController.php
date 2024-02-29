@@ -13,7 +13,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('users/user')->with('users', User::all());
+        return view('users/user')->with('users', User::orderBy('name')->get());
     }
 
     /**
@@ -21,15 +21,26 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('users.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
-        //
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+        ]);
+
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt('password1234'),
+        ]);
+
+        return redirect()->route('users')->with('status', 'New user added');
     }
 
     /**
