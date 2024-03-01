@@ -8,8 +8,14 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="mb-5">
-                <a href="" class="bg-blue-400 px-4 py-3 rounded hover:opacity-70" class="btn">Add voter</a>
+                <a href="{{ route('voter.create') }}" class="bg-blue-400 px-4 py-3 rounded hover:opacity-70" class="btn">Add voter</a>
             </div>
+
+            @if (session('status'))
+                    <div class="p-3 bg-green-300 mt-3" id="alert-message">
+                        {{ session('status') }}
+                    </div>
+                @endif
 
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
@@ -32,10 +38,17 @@
                                         <td colspan="3" class="px-2 py-2"><h3 class="text-red-500 font-semibold">No voter found</h3></td>
                                     </tr>
                                 @else
+                                    @php
+                                        $i = 0;
+                                    @endphp 
                                     @foreach ($voters as $voter)
+                                    @php
+                                        $i++; 
+                                    @endphp
+                                   
                                         <tr class="border-b">
-                                            <td class="px-2 py-2">{{ 1 }}</td>
-                                            <td class="px-2 py-2">{{ $voter->userid }}</td>
+                                            <td class="px-2 py-2">{{ $i }}</td>
+                                            <td class="px-2 py-2">{{ $voter->name }}</td>
                                             <td class="px-2 py-2">
                                                 <a href="" class="rounded bg-red-300 p-1 text-xs hover:opacity-80">Remove</a>
                                             </td>
@@ -50,3 +63,11 @@
         </div>
     </div>
 </x-app-layout>
+
+<script type="module">
+    $(document).ready(function(){
+        setTimeout(() => {
+            $('#alert-message').fadeOut();
+        }, 3000);
+    });
+</script>
