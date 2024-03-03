@@ -26,7 +26,7 @@
                         <tbody>
                             @if (count($users)<1)
                                 <tr>
-                                    <td colspan="3"><h3 class="text-red-300">No available user</h3></td>
+                                    <td colspan="3" class="p-2"><h3 class="text-red-600">No available voter</h3></td>
                                 </tr>
                             @else
                                 @foreach ($users as $user)

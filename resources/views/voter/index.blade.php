@@ -47,11 +47,17 @@
                                     @endphp
                                    
                                         <tr class="border-b">
+                                            <form action="" method="POST" id="delete_form">
+                                                @csrf
+                                                @method('delete')
                                             <td class="px-2 py-2">{{ $i }}</td>
-                                            <td class="px-2 py-2">{{ $voter->name }}</td>
                                             <td class="px-2 py-2">
-                                                <a href="" class="rounded bg-red-300 p-1 text-xs hover:opacity-80">Remove</a>
+                                                {{ $voter->name }}
                                             </td>
+                                            <td cl3ss="px-2 py-2">
+                                                <button class="rounded bg-red-300 p-1 text-xs hover:opacity-80 btn_remove" name="{{$voter->name}}" id="{{$voter->id}}">Remove</button>
+                                            </td>
+                                            </form>
                                         </tr>
                                     @endforeach
                                 @endif
@@ -69,5 +75,20 @@
         setTimeout(() => {
             $('#alert-message').fadeOut();
         }, 3000);
+
+        $(document).on('click', '.btn_remove', function(e){
+            e.preventDefault();
+            
+            const voterName = $(this).attr('name');
+            const id = $(this).attr('id');
+            const confirm_ok = confirm('Do you want delete the voter ' + voterName);
+
+            const form = document.getElementById('delete_form');
+            form.action = '/voter/' + id + '/delete' ;
+
+            if (confirm_ok) {
+                $('#delete_form').submit();
+            }
+        });
     });
 </script>

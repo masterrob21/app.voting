@@ -17,7 +17,7 @@ class Voter_RegisterController extends Controller
     public function index()
     {
         $users = DB::table('users')->join('voter_registers', 'users.id', '=', 'voter_registers.userid')
-                                    ->select('users.name')
+                                    ->select('users.name', 'voter_registers.id')
                                     ->orderBy('name')
                                     ->get();
 
@@ -79,8 +79,11 @@ class Voter_RegisterController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $id): RedirectResponse
     {
-        //
+        $deleteVoter = VoterRegister::find($id);
+        $deleteVoter->delete();
+        
+        return redirect()->route('voters.index')->with('status', 'Voter removed from Voter register');
     }
 }
