@@ -82,7 +82,14 @@ class Voter_RegisterController extends Controller
     public function destroy(string $id): RedirectResponse
     {
         $deleteVoter = VoterRegister::find($id);
-        $deleteVoter->delete();
+
+        $lastRecord = VoterRegister::all();
+        if(count($lastRecord)<2){
+            $deleteVoter->truncate();
+        } else {
+             $deleteVoter->delete();
+        }
+       
         
         return redirect()->route('voters.index')->with('status', 'Voter removed from Voter register');
     }
