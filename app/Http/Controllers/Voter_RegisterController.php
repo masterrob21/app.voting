@@ -91,6 +91,6 @@ class Voter_RegisterController extends Controller
         }
        
         
-        return redirect()->route('voters.index')->with('status', 'Voter removed from Voter register');
+        return redirect()->route('voters.index')->with('warning', 'Voter removed from Voter register');
     }
 }

@@ -68,7 +68,7 @@ class UserController extends Controller
         $user->password = bcrypt('password1234');
         $user->save();
         
-        return redirect()->route('users')->with('status', 'Password reset successfully');
+        return redirect()->route('users')->with('info', 'Password reset successfully');
     }
 
     /**

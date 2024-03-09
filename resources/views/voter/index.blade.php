@@ -12,10 +12,16 @@
             </div>
 
             @if (session('status'))
-                    <div class="p-3 bg-green-300 mt-3" id="alert-message">
-                        {{ session('status') }}
-                    </div>
-                @endif
+                <x-flash>
+                    {{ session('status') }}
+                </x-flash>
+            @endif
+
+            @if (session('warning'))
+                 <x-flash type="warning">
+                    {{ session('warning') }}
+                 </x-flash>
+            @endif
 
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">

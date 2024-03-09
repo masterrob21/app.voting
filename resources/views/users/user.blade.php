@@ -11,11 +11,16 @@
                 <a href="{{ route('user.create') }}" class="bg-blue-400 px-4 py-3 rounded hover:opacity-70" class="btn">Add User</a>
 
                 @if (session('status'))
-                    <div class="p-3 bg-green-300 mt-3" id="alert-message">
+                    <x-flash>
                         {{ session('status') }}
-                    </div>
+                    </x-flash>
                 @endif
-
+                
+                @if (session('info'))
+                <x-flash type="info">
+                    {{ session('info') }}
+                </x-flash>
+            @endif
             </div>
 
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
