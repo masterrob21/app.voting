@@ -54,7 +54,11 @@
                                             <td class="px-2 py-2">{{ $i }}</td>
                                             <td class="px-2 py-2">{{ $ec->name }}</td>
                                             <td class="px-2 py-2">
-                                                <button class="rounded bg-red-300 p-1 text-xs hover:opacity-80" id="{{ $ec->id }}">Remove</button>
+                                                <form action="" method="POST" id="delete_ec_form">
+                                                    @csrf
+                                                    @method('delete')
+                                                <button class="btn-remove rounded bg-red-300 p-1 text-xs hover:opacity-80" id="{{ $ec->id }}">Remove</button>
+                                                </form>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -73,6 +77,20 @@
             setTimeout(() => {
                 $('#alert-message').fadeOut();
             }, 3000);
+
+            $(document).on('click', '.btn-remove', function(e){
+                e.preventDefault();
+
+                const id = $(this).attr('id');
+                const form = document.getElementById('delete_ec_form');
+                const confirm_ok = confirm('You are about to remove an official, Do you want to proceed.');
+
+                form.action = '/ec/' + id + '/delete';
+
+                if(confirm_ok){
+                    $('#delete_ec_form').submit();
+                }
+            });
 
         });
     </script>
