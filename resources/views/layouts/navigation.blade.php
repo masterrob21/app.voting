@@ -24,7 +24,7 @@
                         {{ __('Voter Register') }}
                     </x-nav-link>
 
-                    <x-nav-link :href="route('ec.index')" :active="request()->routeIs('ec.index')">
+                    <x-nav-link :href="route('ec.index')" :active="request()->routeIs('ec.index') || request()->routeIs('ec.create')">
                         {{ __('EC Officials') }}
                     </x-nav-link>
                 </div>
@@ -92,7 +92,7 @@
                 {{ __('Voter Register') }}
             </x-responsive-nav-link>
 
-            <x-responsive-nav-link :href="route('ec.index')" :active="request()->routeIs('ec.index')">
+            <x-responsive-nav-link :href="route('ec.index')" :active="request()->routeIs('ec.index') || request()->routeIs('ec.create')">
                 {{ __('EC Officials') }}
             </x-responsive-nav-link>
         </div>

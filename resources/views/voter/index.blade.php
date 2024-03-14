@@ -52,7 +52,7 @@
                                         $i++; 
                                     @endphp
                                    
-                                        <tr class="border-b">
+                                        <tr class="border-b even:bg-gray-50">
                                             <form action="" method="POST" id="delete_form">
                                                 @csrf
                                                 @method('delete')

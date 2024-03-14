@@ -1,3 +1,6 @@
+@php
+    $i = 0;
+@endphp
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -8,7 +11,18 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="mb-5">
-                <a href="" class="bg-blue-400 px-4 py-3 rounded hover:opacity-70" class="btn">Add EC</a>
+                <a href="{{ route('ec.create') }}" class="bg-blue-400 px-4 py-3 rounded hover:opacity-70" class="btn">Add EC</a>
+                @if (session('status'))
+                <x-flash>
+                    {{ session('status') }}
+                </x-flash>
+            @endif
+
+            @if (session('warning'))
+                 <x-flash type="warning">
+                    {{ session('warning') }}
+                 </x-flash>
+            @endif
             </div>
 
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -29,15 +43,18 @@
                             <tbody>
                                 @if (count($ecs)<1)
                                     <tr class="border-b">
-                                        <td colspan="3" class="px-2 py-2"><h3 class="text-red-500 font-semibold">No voter found</h3></td>
+                                        <td colspan="3" class="px-2 py-2"><h3 class="text-red-500 font-semibold">No EC official found</h3></td>
                                     </tr>
                                 @else
                                     @foreach ($ecs as $ec)
-                                        <tr class="border-b">
-                                            <td class="px-2 py-2">{{ 1 }}</td>
-                                            <td class="px-2 py-2">{{ $ec->userid }}</td>
+                                    @php
+                                        $i++
+                                    @endphp
+                                        <tr class="border-b even:bg-gray-50">
+                                            <td class="px-2 py-2">{{ $i }}</td>
+                                            <td class="px-2 py-2">{{ $ec->name }}</td>
                                             <td class="px-2 py-2">
-                                                <a href="" class="rounded bg-red-300 p-1 text-xs hover:opacity-80">Remove</a>
+                                                <button class="rounded bg-red-300 p-1 text-xs hover:opacity-80" id="{{ $ec->id }}">Remove</button>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -49,4 +66,14 @@
             </div>
         </div>
     </div>
+
+    <script type="module">
+        $(document).ready(function(){
+
+            setTimeout(() => {
+                $('#alert-message').fadeOut();
+            }, 3000);
+
+        });
+    </script>
 </x-app-layout>

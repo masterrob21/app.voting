@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Ec_Official;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class Ec_OfficialController extends Controller
 {
@@ -12,7 +13,12 @@ class Ec_OfficialController extends Controller
      */
     public function index()
     {
-        return view('voter.ec')->with('ecs', Ec_Official::all());
+        $users = DB::table('users')->join('ec__officials', 'users.id', '=', 'ec__officials.userid')
+                                    ->select('users.name', 'ec__officials.id')
+                                    ->orderBy('name')
+                                    ->get();
+
+        return view('voter.ec')->with('ecs', $users);
     }
 
     /**
@@ -20,15 +26,26 @@ class Ec_OfficialController extends Controller
      */
     public function create()
     {
-        //
+        $ecOfficials = DB::table('ec__officials')->select('userid');
+
+        $users = DB::table('users')->where('is_system', 0)
+                                    ->whereNotIn('id', $ecOfficials)
+                                    ->orderBy('name')
+                                    ->get();
+
+        return view('voter.create-ec')->with('users', $users);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, String $id)
     {
-        //
+        $ec = new Ec_Official;
+        $ec->userid = $id;
+        $ec->save();
+
+        return redirect(route('ec.index'))->with('status', 'Ec official added');
     }
 
     /**
