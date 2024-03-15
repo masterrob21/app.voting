@@ -79,7 +79,7 @@
 
     {{-- Modal for adding positions --}}
     <x-modal name="addPosition" :show="$errors->isNotEmpty()" focusable>
-        <form method="post" action="" class="p-6">
+        <form method="post" action="{{route('positions.store')}}" class="p-6">
             @csrf
 
             <h2 class="text-lg font-medium text-gray-900">

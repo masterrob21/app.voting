@@ -29,7 +29,15 @@ class PositionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'position' => ['required', 'string', 'unique:positions,position']
+        ]);
+
+        $position = Position::create([
+            'position' => $request->position,
+        ]);
+
+        return redirect(route('positions.index'))->with('status', 'New position added.');
     }
 
     /**
