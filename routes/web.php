@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Ec_OfficialController;
+use App\Http\Controllers\PositionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Voter_RegisterController;
@@ -17,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
+Route::resource('positions', PositionController::class);
 
 Route::get('ecs', [Ec_OfficialController::class, 'index'])->name('ec.index');
 Route::get('/ec', [Ec_OfficialController::class, 'create'])->name('ec.create');
