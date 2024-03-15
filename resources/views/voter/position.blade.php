@@ -8,7 +8,9 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="mb-5">
-                <a href="" class="bg-blue-400 px-4 py-3 rounded hover:opacity-70" class="btn">New Position</a>
+                <x-primary-button x-data="" x-on:click.prevent="$dispatch('open-modal', 'addPosition')">
+                    {{ __('Add Position') }}
+                </x-primary-button>
             </div>
 
             @if (session('status'))
@@ -74,6 +76,42 @@
             </div>
         </div>
     </div>
+
+    {{-- Modal for adding positions --}}
+    <x-modal name="addPosition" :show="$errors->isNotEmpty()" focusable>
+        <form method="post" action="" class="p-6">
+            @csrf
+
+            <h2 class="text-lg font-medium text-gray-900">
+                {{ __('New Position') }}
+            </h2>
+
+            <div class="mt-6">
+                <x-input-label for="position" value="{{ __('position') }}" class="sr-only" />
+
+                <x-text-input
+                    id="position"
+                    name="position"
+                    type="text"
+                    class="mt-1 block w-3/4"
+                    placeholder="{{ __('Position') }}"
+                />
+
+                <x-input-error :messages="$errors->get('position')" class="mt-2" />
+            </div>
+
+            <div class="mt-6 flex justify-end">
+                <x-secondary-button x-on:click="$dispatch('close')">
+                    {{ __('Cancel') }}
+                </x-secondary-button>
+
+                <x-primary-button class="ms-3">
+                    {{ __('Add Position') }}
+                </x-primary-button>
+            </div>
+        </form>
+    </x-modal>
+
 </x-app-layout>
 
 <script type="module">
