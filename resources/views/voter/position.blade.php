@@ -63,7 +63,7 @@
                                                 {{ $position->position }}
                                             </td>
                                             <td cl3ss="px-2 py-2">
-                                                <button class="rounded bg-red-300 p-1 text-xs hover:opacity-80 btn_remove" name="{{$position->name}}" id="{{$position->id}}">Remove</button>
+                                                <button class="rounded bg-red-300 p-1 text-xs hover:opacity-80 btn_remove" id="{{$position->id}}">Remove</button>
                                             </td>
                                             </form>
                                         </tr>
@@ -123,12 +123,11 @@
         $(document).on('click', '.btn_remove', function(e){
             e.preventDefault();
             
-            const voterName = $(this).attr('name');
             const id = $(this).attr('id');
-            const confirm_ok = confirm('Do you want delete the voter ' + voterName);
+            const confirm_ok = confirm('You are about to delete a record, Do you want to proceed?');
 
             const form = document.getElementById('delete_form');
-            form.action = '/voter/' + id + '/delete' ;
+            form.action = '/positions/' + id  ;
 
             if (confirm_ok) {
                 $('#delete_form').submit();

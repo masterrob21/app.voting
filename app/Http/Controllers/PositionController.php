@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Position;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -67,8 +68,10 @@ class PositionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Position $position): RedirectResponse
     {
-        //
+        $position->delete();
+
+        return redirect(route('positions.index'))->with('warning', 'Position deleted successfully.');
     }
 }
