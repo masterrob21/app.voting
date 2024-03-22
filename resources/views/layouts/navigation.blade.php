@@ -45,6 +45,10 @@
                                 <x-dropdown-link :href="route('positions.index')" :active="request()->routeIs('positions.index')">
                                     {{ __('Positions') }}
                                 </x-dropdown-link>
+
+                                <x-dropdown-link :href="route('nominee.index')" :active="request()->routeIs('nominee.index')">
+                                    {{ __('Nominees') }}
+                                </x-dropdown-link>
         
         
                             </x-slot>
@@ -128,7 +132,10 @@
                     <x-responsive-nav-link :href="route('positions.index')">
                         {{ __('Positions') }}
                     </x-responsive-nav-link>
-    
+                    
+                    <x-responsive-nav-link :href="route('nominee.index')">
+                        {{ __('Nominees') }}
+                    </x-responsive-nav-link>
                     
                 </div>
             </div>

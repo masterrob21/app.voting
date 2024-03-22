@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Ec_OfficialController;
+use App\Http\Controllers\NomineeController;
 use App\Http\Controllers\PositionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
@@ -17,6 +18,8 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::resource('nominee', NomineeController::class);
 
 Route::resource('positions', PositionController::class);
 
