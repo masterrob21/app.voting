@@ -46,7 +46,7 @@ class NomineeController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'userid' => ['required'],
+            'userid' => ['required', 'unique:nominees,userid'],
             'position' => ['required']
         ]);
 
