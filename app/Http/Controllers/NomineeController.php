@@ -16,6 +16,7 @@ class NomineeController extends Controller
         $nominee = DB::table('nominees')->join('users', 'nominees.userid', '=', 'users.id')
                                         ->join('positions', 'nominees.positionid', '=', 'positions.id')
                                         ->select('users.name', 'positions.position', 'nominees.id')
+                                        ->orderBy('position')
                                         ->get();
 
         return view('nominee.index')->with('nominees', $nominee);
