@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Nominee;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\View\View;
 
 class NomineeController extends Controller
 {
@@ -25,17 +27,35 @@ class NomineeController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): View
     {
-        //
+        $users = DB::table('users')->select('id', 'name')
+                                    ->orderBy('name')
+                                    ->get();
+
+        $positions = DB::table('positions')->orderBy('position')
+                                            ->get();
+
+        return view('nominee.create')->with('users', $users)
+                                    ->with('positions', $positions);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
-        //
+        $request->validate([
+            'userid' => ['required'],
+            'position' => ['required']
+        ]);
+
+        $nominee = Nominee::create([
+            'userid' => $request->userid,
+            'positionid' => $request->position
+        ]);
+
+        return redirect(route('nominee.index'))->with('status', 'Nominee added.');
     }
 
     /**

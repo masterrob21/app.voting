@@ -11,7 +11,7 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="mb-5">
-                <a href="{{ route('nominee.index') }}" class="bg-blue-400 px-4 py-3 rounded hover:opacity-70" class="btn">Add a nominee</a>
+                <a href="{{ route('nominee.create') }}" class="bg-blue-400 px-4 py-3 rounded hover:opacity-70" class="btn">Add a nominee</a>
                 @if (session('status'))
                 <x-flash>
                     {{ session('status') }}
