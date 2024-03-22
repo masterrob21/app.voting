@@ -29,7 +29,11 @@ class NomineeController extends Controller
      */
     public function create(): View
     {
-        $users = DB::table('users')->select('id', 'name')
+        $nominee = DB::table('nominees')->select('userid');
+
+        $users = DB::table('users')->where('is_system', 0)
+                                    ->whereNotIn('id', $nominee)
+                                    ->select('id', 'name')
                                     ->orderBy('name')
                                     ->get();
 
