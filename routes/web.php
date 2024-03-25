@@ -25,7 +25,7 @@ Route::get('/accessdenied', [SystemAccountController::class, 'checkSystemAccount
 
 Route::resource('nominee', NomineeController::class);
 
-Route::resource('positions', PositionController::class);
+Route::resource('positions', PositionController::class)->middleware(['auth', 'systemAccount']);
 
 Route::middleware('auth')->group(function(){
     Route::get('ecs', [Ec_OfficialController::class, 'index'])->name('ec.index');
