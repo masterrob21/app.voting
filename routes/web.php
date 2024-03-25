@@ -39,7 +39,7 @@ Route::middleware('auth')->group(function(){
     Route::get('/voters', [Voter_RegisterController::class, 'index'])->name('voters.index');
     Route::get('/voter', [Voter_RegisterController::class, 'create'])->name('voter.create')->middleware('systemAccount');
     Route::post('/voter/{id}', [Voter_RegisterController::class, 'store'])->name('voter.store');
-    Route::delete('/voter/{id}/delete', [Voter_RegisterController::class, 'destroy'])->name('voter.destroy');
+    Route::delete('/voter/{id}/delete', [Voter_RegisterController::class, 'destroy'])->name('voter.destroy')->middleware('systemAccount');
 });
 
 
