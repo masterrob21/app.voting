@@ -4,8 +4,10 @@ use App\Http\Controllers\Ec_OfficialController;
 use App\Http\Controllers\NomineeController;
 use App\Http\Controllers\PositionController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SystemAccountController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Voter_RegisterController;
+use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,6 +21,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/accessdenied', [SystemAccountController::class, 'checkSystemAccount']);
+
 Route::resource('nominee', NomineeController::class);
 
 Route::resource('positions', PositionController::class);
@@ -28,12 +32,16 @@ Route::get('/ec', [Ec_OfficialController::class, 'create'])->name('ec.create');
 Route::post('/ec/{id}', [Ec_OfficialController::class, 'store'])->name('ec.store');
 Route::delete('/ec/{id}/delete', [Ec_OfficialController::class, 'destroy'])->name('ec.destroy');
 
-Route::get('/voters', [Voter_RegisterController::class, 'index'])->name('voters.index');
-Route::get('/voter', [Voter_RegisterController::class, 'create'])->name('voter.create');
-Route::post('/voter/{id}', [Voter_RegisterController::class, 'store'])->name('voter.store');
-Route::delete('/voter/{id}/delete', [Voter_RegisterController::class, 'destroy'])->name('voter.destroy');
-
 Route::middleware('auth')->group(function(){
+    Route::get('/voters', [Voter_RegisterController::class, 'index'])->name('voters.index');
+    Route::get('/voter', [Voter_RegisterController::class, 'create'])->name('voter.create')->middleware('systemAccount');
+    Route::post('/voter/{id}', [Voter_RegisterController::class, 'store'])->name('voter.store');
+    Route::delete('/voter/{id}/delete', [Voter_RegisterController::class, 'destroy'])->name('voter.destroy');
+});
+
+
+
+Route::middleware(['auth', 'systemAccount'])->group(function(){
     Route::get('user/{id}', [UserController::class, 'update'])->name('user.resetpass');
     Route::get('/users', [UserController::class, 'index'])->name('users');
     Route::get('/user', [UserController::class, 'create'])->name('user.create');
