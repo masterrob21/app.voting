@@ -31,7 +31,7 @@ Route::middleware('auth')->group(function(){
     Route::get('ecs', [Ec_OfficialController::class, 'index'])->name('ec.index');
     Route::get('/ec', [Ec_OfficialController::class, 'create'])->name('ec.create')->middleware('systemAccount');
     Route::post('/ec/{id}', [Ec_OfficialController::class, 'store'])->name('ec.store');
-    Route::delete('/ec/{id}/delete', [Ec_OfficialController::class, 'destroy'])->name('ec.destroy');
+    Route::delete('/ec/{id}/delete', [Ec_OfficialController::class, 'destroy'])->name('ec.destroy')->middleware('systemAccount');
 
 });
 
