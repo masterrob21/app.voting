@@ -97,6 +97,6 @@ class NomineeController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        // $this->middleware('');
+        $this->middleware('ecOfficial')->except('index');
     }
 }
