@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('userid')->unique();
             $table->integer('positionid');
+            $table->string('photo');
             $table->timestamps();
         });
     }
