@@ -89,14 +89,17 @@ class NomineeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Nominee $nominee)
     {
-        //
+        $nominee->delete();
+
+        return redirect(route('nominee.index'))->with('warning', 'Nominee has being removed');
     }
 
     public function __construct()
     {
         $this->middleware('auth');
         $this->middleware('ecOfficial')->except('index');
+        
     }
 }

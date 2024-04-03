@@ -85,12 +85,12 @@
 
                 const id = $(this).attr('id');
                 const form = document.getElementById('delete_nominee_form');
-                const confirm_ok = confirm('You are about to remove an official, Do you want to proceed.');
+                const confirm_ok = confirm('You are about to remove a Nominee, Do you want to proceed.');
 
-                form.action = '/ec/' + id + '/delete';
+                form.action = '/nominee/' + id ;
 
                 if(confirm_ok){
-                    $('#delete_ec_form').submit();
+                    $('#delete_nominee_form').submit();
                 }
             });
 
