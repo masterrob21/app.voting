@@ -11,6 +11,7 @@ class Nominee extends Model
 
     protected $fillable = [
         'userid',
-        'positionid'
+        'positionid',
+        'photo',
     ];
 }

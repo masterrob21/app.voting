@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Storage;
 use App\Models\Nominee;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -17,7 +18,7 @@ class NomineeController extends Controller
     {
         $nominee = DB::table('nominees')->join('users', 'nominees.userid', '=', 'users.id')
                                         ->join('positions', 'nominees.positionid', '=', 'positions.id')
-                                        ->select('users.name', 'positions.position', 'nominees.id')
+                                        ->select('users.name', 'positions.position', 'nominees.id', 'photo')
                                         ->orderBy('position')
                                         ->get();
 
@@ -51,12 +52,16 @@ class NomineeController extends Controller
     {
         $request->validate([
             'userid' => ['required', 'unique:nominees,userid'],
-            'position' => ['required']
+            'position' => ['required'],
+            'photo' => ['required', 'image']
         ]);
+
+        $photo = $request->photo->store('images', 'public');
 
         $nominee = Nominee::create([
             'userid' => $request->userid,
-            'positionid' => $request->position
+            'positionid' => $request->position,
+            'photo' => $photo,
         ]);
 
         return redirect(route('nominee.index'))->with('status', 'Nominee added.');

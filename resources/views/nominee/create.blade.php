@@ -10,7 +10,7 @@
             <h1 class="text-red-400 font-bold text-center text-lg mb-4 underline">New Nominee</h1>
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                   <form action="{{ route('nominee.store') }}" method="POST">
+                   <form action="{{ route('nominee.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="mt-4">
                         <x-input-label for="userid" :value="__('UserName')" />
@@ -32,6 +32,12 @@
                             @endforeach
                         </select>
                         <x-input-error :messages="$errors->get('position')" class="mt-2" />
+                    </div>
+
+                    <div class="mt-4">
+                        <x-input-label for="photo" :value="__('Photo')" />
+                        <input type="file" class="block mt-1 w-full" name="photo" required>
+                        <x-input-error :messages="$errors->get('photo')" class="mt-2" />
                     </div>
 
                     <div class="mt-4 flex flex-row-reverse">

@@ -37,6 +37,7 @@
                                     <th class="px-2 py-3">#</th>
                                     <th class="px-2 py-2">Name</th>
                                     <th class="px-2 py-2">Position</th>
+                                    <th class="px-2 py-2">Photo</th>
                                     <th class="px-2 py-2">Action</th>
                                 </tr>
                             </thead>
@@ -55,6 +56,7 @@
                                             <td class="px-2 py-2">{{ $i }}</td>
                                             <td class="px-2 py-2">{{ $nominee->name }}</td>
                                             <td class="px-2 py-2">{{ $nominee->position }}</td>
+                                            <td class="px-2 py-2"><img src="{{asset('storage/'.$nominee->photo)}}" class="h-14 w-16 object-cover" alt="photo of nominee"></td>
                                             <td class="px-2 py-2">
                                                 <form action="" method="POST" id="delete_nominee_form">
                                                     @csrf
