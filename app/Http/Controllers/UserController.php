@@ -13,7 +13,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('users/user')->with('users', User::orderBy('name')->get());
+        return view('users/user')->with('users', User::orderBy('name')->paginate(10));
     }
 
     /**
