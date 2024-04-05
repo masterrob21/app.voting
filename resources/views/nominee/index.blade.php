@@ -56,7 +56,7 @@
                                             <td class="px-2 py-2">{{ $i }}</td>
                                             <td class="px-2 py-2">{{ $nominee->name }}</td>
                                             <td class="px-2 py-2">{{ $nominee->position }}</td>
-                                            <td class="px-2 py-2"><img src="{{asset('storage/'.$nominee->photo)}}" class="h-14 w-16 object-cover" alt="photo of nominee"></td>
+                                            <td class="px-2 py-2"><img src="{{asset('storage/'.$nominee->photo)}}" class="h-10 w-10 object-cover rounded-full" alt="photo of nominee"></td>
                                             <td class="px-2 py-2">
                                                 <form action="" method="POST" id="delete_nominee_form">
                                                     @csrf
