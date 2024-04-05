@@ -95,8 +95,10 @@ class NomineeController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy(Nominee $nominee)
-    {
-        $nominee->delete();
+    { 
+        if (Storage::disk('public')->delete($nominee->photo)){
+            $nominee->delete();
+        }
 
         return redirect(route('nominee.index'))->with('warning', 'Nominee has being removed');
     }
