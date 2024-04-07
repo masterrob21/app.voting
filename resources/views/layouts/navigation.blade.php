@@ -54,6 +54,10 @@
                             </x-slot>
                         </x-dropdown>
                     </div>
+
+                    <x-nav-link :href="route('voting.index')" :active="request()->routeIs('voting.index') ">
+                        {{ __('Voting') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -139,6 +143,10 @@
                     
                 </div>
             </div>
+
+            <x-responsive-nav-link :href="route('voting.index')" :active="request()->routeIs('voting.index') ">
+                {{ __('Voting') }}
+            </x-responsive-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->

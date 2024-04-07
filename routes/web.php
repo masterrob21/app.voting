@@ -7,6 +7,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SystemAccountController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Voter_RegisterController;
+use App\Http\Controllers\VotingController;
 use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 
@@ -20,6 +21,8 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::resource('voting', VotingController::class);
 
 Route::get('/accessdenied', [SystemAccountController::class, 'checkSystemAccount']);
 
