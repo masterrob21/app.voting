@@ -17,7 +17,9 @@ class UserSeeder extends Seeder
             'name'=> 'Administrator',
             'email' => 'admin@noreply.com',
             'password' => bcrypt('admin1234'),
-            'is_system' => '1'
-        ]);
+            'is_system' => '1',
+            'created_at' => now(),
+            'updated_at' => now(),
+         ]);
     }
 }
